@@ -6,6 +6,8 @@ import 'package:login/utils/network/remote/dio_helper.dart';
 import 'package:login/utils/network/remote/end_points.dart';
 import 'package:meta/meta.dart';
 
+import '../../../utils/network/local/cache_helper.dart';
+
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -63,7 +65,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     DioHelper.getData(
       url: universityEndPoint,
-      token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjIsInJvbGUiOjQsImlhdCI6MTY2MzAyODMyNiwiZXhwIjoxNzQ5NDI4MzI2fQ.aTR7ZOpgvd5ub4i3bFDrQjrBKXIu10n-eecvxnObt_w",
+      token:CacheHelper.getData(key: 'token'),
     ).then((value) {
       if (value.statusCode == 200) {
         universityModel = UniversityModel.fromJson(json: value.data);
@@ -84,7 +86,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     DioHelper.getData(
       url: gradeEndPoint,
-      token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjIsInJvbGUiOjQsImlhdCI6MTY2MzAyODMyNiwiZXhwIjoxNzQ5NDI4MzI2fQ.aTR7ZOpgvd5ub4i3bFDrQjrBKXIu10n-eecvxnObt_w",
+      token:CacheHelper.getData(key: 'token'),
     ).then((value) {
       if (value.statusCode == 200) {
         gradeModel = GradeModel.fromJson(value.data);

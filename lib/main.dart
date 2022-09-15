@@ -6,6 +6,7 @@ import 'package:login/res/constants.dart';
 import 'package:login/utils/network/local/cache_helper.dart';
 import 'package:login/utils/network/remote/dio_helper.dart';
 import 'package:login/view/pages/auth/login_screen.dart';
+import 'package:login/view/pages/bar_items/bottom_bar_screen.dart';
 import 'package:login/view/pages/bar_items/news/news_details.dart';
 import 'package:login/view/pages/bar_items/news/news_screen.dart';
 import 'package:login/view/pages/intro/splash_screen.dart';
@@ -16,10 +17,15 @@ import 'package:login/view_model/bloc/note_cubit/note_cubit.dart';
 import 'package:login/view_model/bloc/register_cubit/register_cubit.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'view_model/bloc/faqs_cubit/faqs_cubit.dart';
+import 'view_model/bloc/term_cubit/term_cubit.dart';
+
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
   Bloc.observer = MyBlocObserver();
+  await CacheHelper.init();
+
   runApp(const MyApp());
 }
 
@@ -36,6 +42,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (BuildContext context) => RegisterCubit()..getGradesData()..getUniversitiesData()),
           BlocProvider(create: (BuildContext context) => LoginCubit()),
           BlocProvider(create: (BuildContext context) => NoteCubit()..getNotes()..getTime()),
+          BlocProvider(
+            create: (context) => FaqCubit()..getData(),
+          ),
+          BlocProvider(
+            create: (context) => TermCubit()..getTerms(),
+          ),
         ],
         child: BlocConsumer<AppCubit,AppStates>(
           listener: (context,state){},
@@ -49,7 +61,7 @@ class MyApp extends StatelessWidget {
               home: AnimatedSplashScreen(
                 duration: 3000,
                 splash: const SplashScreen(),
-                nextScreen: LoginScreen(),
+                nextScreen:CacheHelper.getData(key: "token") != '' ?BottomBarScreen() : LoginScreen(),
                 splashTransition: SplashTransition.fadeTransition,
                 pageTransitionType: PageTransitionType.leftToRight,
                 backgroundColor: Colors.white,

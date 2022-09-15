@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login/utils/network/local/cache_helper.dart';
 import 'package:login/utils/network/remote/end_points.dart';
 import 'package:meta/meta.dart';
 
@@ -34,6 +35,8 @@ class LoginCubit extends Cubit<LoginState> {
     {
       print(value.data);
       loginModel = LoginModel.fromJson(value.data);
+      CacheHelper.saveString(key: "token", value: loginModel!.data!.accessToken);
+
       emit(LoginSuccessState(loginModel!));
     }).catchError((error)
     {

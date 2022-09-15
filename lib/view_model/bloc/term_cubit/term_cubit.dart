@@ -7,6 +7,7 @@ import 'package:login/utils/network/remote/end_points.dart';
 import 'package:meta/meta.dart';
 
 import '../../../res/constants.dart';
+import '../../../utils/network/local/cache_helper.dart';
 
 part 'term_state.dart';
 
@@ -25,7 +26,7 @@ class TermCubit extends Cubit<TermState> {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsInJvbGUiOjQsImlhdCI6MTY2MTg3OTkwOSwiZXhwIjoxNzQ4Mjc5OTA5fQ.ME2mIoddrS2zNiveNhg2cezMxKpqC0j6KUzbxIIcsU0";
     DioHelper.getData(
         url: termsEndPoint,
-        token: token
+        token: CacheHelper.getData(key: 'token')
     ).then(
           (value) {
         if (value.statusCode == 200) {

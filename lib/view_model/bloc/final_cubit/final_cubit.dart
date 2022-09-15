@@ -7,6 +7,7 @@ import 'package:login/utils/network/remote/end_points.dart';
 import 'package:login/view_model/bloc/final_cubit/final_state.dart';
 
 import '../../../res/constants.dart';
+import '../../../utils/network/local/cache_helper.dart';
 
 class ExamsCubit extends Cubit<ExamsState> {
   ExamsCubit() : super(ExamsInitial());
@@ -24,7 +25,7 @@ class ExamsCubit extends Cubit<ExamsState> {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsInJvbGUiOjQsImlhdCI6MTY2MTg3OTkwOSwiZXhwIjoxNzQ4Mjc5OTA5fQ.ME2mIoddrS2zNiveNhg2cezMxKpqC0j6KUzbxIIcsU0";
     DioHelper.getData(
         url: examsEndPoint,
-        token: token
+        token: CacheHelper.getData(key: 'token')
     ).then(
           (value) {
         if (value.statusCode == 200) {

@@ -6,6 +6,7 @@ import 'package:login/utils/network/remote/dio_helper.dart';
 import 'package:login/utils/network/remote/end_points.dart';
 
 import '../../../res/constants.dart';
+import '../../../utils/network/local/cache_helper.dart';
 
 part 'lectures_state.dart';
 
@@ -27,7 +28,7 @@ class LecturesCubit extends Cubit<LecturesState> {
 
     DioHelper.getData(
         url: lectureEndPoint,
-        token: token
+        token: CacheHelper.getData(key: 'token')
     ).then(
           (value) {
         if (value.statusCode == 200) {
