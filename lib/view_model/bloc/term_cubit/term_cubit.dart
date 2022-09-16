@@ -19,6 +19,7 @@ class TermCubit extends Cubit<TermState> {
   TermModel? termModel;
   bool? isLoading  = true;
 
+
   Future getTerms() async {
     emit(GetTermLoadingState());
 

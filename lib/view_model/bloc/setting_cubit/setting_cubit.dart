@@ -18,7 +18,6 @@ class SettingCubit extends Cubit<SettingState> {
 
   SignOut(context){
 
-
     emit(GetData());
   }
 

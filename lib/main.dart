@@ -2,11 +2,12 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/res/constants.dart';
 import 'package:login/utils/network/local/cache_helper.dart';
 import 'package:login/utils/network/remote/dio_helper.dart';
 import 'package:login/view/pages/auth/login_screen.dart';
 import 'package:login/view/pages/bar_items/bottom_bar_screen.dart';
+import 'package:login/view/pages/bar_items/home/notes/note_Screen.dart';
+import 'package:login/view/pages/bar_items/home/notes/update_note_screen.dart';
 import 'package:login/view/pages/bar_items/news/news_details.dart';
 import 'package:login/view/pages/bar_items/news/news_screen.dart';
 import 'package:login/view/pages/intro/splash_screen.dart';
@@ -70,6 +71,8 @@ class MyApp extends StatelessWidget {
               {
                 "news_details": (context) => NewsDetailsScreen(),
                 "news": (context) => NewsScreen(),
+                "note": (context) => NoteScreen(),
+                "note_details": (context) => UpdateNoteScreen(),
               },
             );
           },

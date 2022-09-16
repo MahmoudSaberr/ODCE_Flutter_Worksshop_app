@@ -49,6 +49,26 @@ class NoteCubit extends Cubit<NoteState> {
     emit(NoteInsertDatabaseState());
   }
 
+  Future updateNote(
+      id,
+      String title,
+      String description,
+      String date,
+      ) async {
+    emit(NoteInsertDatabaseLoadingState());
+    NotesDatabaseHelper.updateNote(id,title, description, date);
+    emit(NoteInsertDatabaseState());
+  }
+
+  Future deleteNote(
+      id ,
+      ) async {
+    emit(NoteDeleteDatabaseLoadingState());
+    NotesDatabaseHelper.deleteNote(id);
+    emit(NoteDeleteDatabaseState());
+  }
+
+
 
 }
 

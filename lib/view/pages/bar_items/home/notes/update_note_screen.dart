@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login/view/components/core/widgets/components.dart';
-import 'package:login/view_model/bloc/note_cubit/note_cubit.dart';
+import 'package:login/model/home/notes/note_details_model.dart';
 
+import '../../../../../view_model/bloc/note_cubit/note_cubit.dart';
+import '../../../../components/core/widgets/components.dart';
 import 'note_Screen.dart';
 
-class AddNoteScreen extends StatelessWidget {
-  AddNoteScreen({Key? key}) : super(key: key);
-  var formKey = GlobalKey<FormState>();
+class UpdateNoteScreen extends StatelessWidget {
+   UpdateNoteScreen({Key? key}) : super(key: key);
+   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     var titleController = TextEditingController();
     var descController = TextEditingController();
     var dateController = TextEditingController();
+    NoteDetails? details = ModalRoute.of(context)?.settings.arguments as NoteDetails?;
 
     DateTime date = DateTime.now();
 
@@ -38,7 +40,7 @@ class AddNoteScreen extends StatelessWidget {
               },
             ),
             title: Text(
-              'Add Note',
+              'Update Note',
               style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w500,
                   fontSize: 30,
@@ -56,11 +58,11 @@ class AddNoteScreen extends StatelessWidget {
                   type: TextInputType.name,
                   validate: ( value) {
                     if (value.isEmpty) {
-                      showToast(text: 'title must not be empty', state: ToastStates.WARNING);
                       return 'title must not be empty';
                     }
                   },
                   label: 'Title',
+                  date: details!.title
                 ),
                 const SizedBox(height: 30,),
                 defaultFormFieldForNote(
@@ -81,14 +83,13 @@ class AddNoteScreen extends StatelessWidget {
                     },
                     validate: ( value) {
                       if (value.isEmpty) {
-                        showToast(text: 'date must not be empty', state: ToastStates.WARNING);
                         return 'date must not be empty';
                       }
                       return null;
                     },
                     label: date.toString(),
                     readOnly: true,
-                    date: date.toString()
+                    date: details.date
                 ),
                 const SizedBox(height: 30,),
                 defaultFormFieldForNote(
@@ -96,27 +97,26 @@ class AddNoteScreen extends StatelessWidget {
                   type: TextInputType.multiline,
                   validate: ( value) {
                     if (value.isEmpty) {
-                      showToast(text: 'description must not be empty', state: ToastStates.WARNING);
                       return 'description must not be empty';
                     }
                   },
                   label: 'Description',
+                    date: details.subtitle
+
                 ),
                 const SizedBox(height: 30,),
                 defaultButton(
                     function: () {
                       if (formKey.currentState!.validate()) {
-                        NoteCubit.get(context).insertNote(
+                        NoteCubit.get(context).updateNote(
+                            details.id,
                             titleController.text,
                             descController.text,
                             date.toString()
                         );
                         navigateTo(context, NoteScreen());
-                    } else {
-                        showToast(text: 'No update yet', state: ToastStates.WARNING);
-                      }
-                      },
-                    text: 'Add')
+                      }},
+                    text: 'Update')
               ],
             ),
           ),

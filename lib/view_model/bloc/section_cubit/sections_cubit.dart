@@ -20,7 +20,6 @@ class SectionsCubit extends Cubit<SectionsState> {
   Future getSections() async {
 
     emit(GetSectionsLoadingState());
-
     var token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsInJvbGUiOjQsImlhdCI6MTY2MTg3OTkwOSwiZXhwIjoxNzQ4Mjc5OTA5fQ.ME2mIoddrS2zNiveNhg2cezMxKpqC0j6KUzbxIIcsU0";
     DioHelper.getData(

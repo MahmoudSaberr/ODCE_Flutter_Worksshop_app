@@ -139,11 +139,14 @@ class LoginScreen extends StatelessWidget {
                     // const Center(child: CircularProgressIndicator(color: Colors.orange,))
                     defaultButton(
                         function: () {
-                          LoginCubit.get(context).userLogin(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                          showToast(text: 'Welcome Back', state: ToastStates.SUCCESS);
+                          if (formKey.currentState!.validate())
+                          {
+                            LoginCubit.get(context).userLogin(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+                            showToast(text: 'Welcome Back', state: ToastStates.SUCCESS);
+                          }
                         },
                         text: "Login"),
 

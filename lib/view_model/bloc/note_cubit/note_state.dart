@@ -18,6 +18,8 @@ class NoteUpdateDatabaseState extends NoteState {}
 
 class NoteDeleteDatabaseState extends NoteState {}
 
+class NoteDeleteDatabaseLoadingState extends NoteState {}
+
 class NoteTimeLoaded extends NoteState {}
 
 class NoteTimeLoading extends NoteState {}

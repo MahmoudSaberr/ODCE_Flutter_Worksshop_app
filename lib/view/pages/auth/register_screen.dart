@@ -300,6 +300,7 @@ class RegisterScreen extends StatelessWidget {
                               phoneNumber: phoneController.text,
                               universityId: universityController.text,
                               gradeId: gradeController.text,);
+                            showToast(text: 'successfully registered', state: ToastStates.SUCCESS);
                           }
                         },
                         text: "Sign Up"),

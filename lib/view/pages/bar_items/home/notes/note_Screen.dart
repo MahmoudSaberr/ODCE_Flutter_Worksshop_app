@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login/model/home/notes/note_details_model.dart';
 import 'package:login/view/pages/bar_items/bottom_bar_screen.dart';
 import 'package:login/view/components/core/widgets/components.dart';
+import 'package:login/view/pages/bar_items/home/notes/update_note_screen.dart';
 
 import '../../../../../view_model/bloc/note_cubit/note_cubit.dart';
 import 'add_note_screen.dart';
@@ -51,28 +53,50 @@ class NoteScreen extends StatelessWidget {
                       print(cubit.notes[index].id);
                       return Column(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                10,
+                          InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(
+                                  context,
+                                  'note_details',
+                              arguments: NoteDetails(
+                                  id:cubit.notes[index].id,
+                                  title: cubit.notes[index].title.toString(),
+                                  subtitle: cubit.notes[index].description.toString(),
+                                  date: cubit.notes[index].date.toString()
+                              ));
+                              },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
+                                border:
+                                    Border.all(color: Colors.orange, width: 1),
                               ),
-                              border:
-                                  Border.all(color: Colors.orange, width: 1),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.sticky_note_2_rounded,
-                                color: Colors.orange,
-                              ),
-                              title: Text(
-                                cubit.notes[index].title.toString(),
-                                style:
-                                    GoogleFonts.poppins(color: Colors.black),
-                              ),
-                              subtitle: Text(
-                                cubit.notes[index].description!,
-                                style:
-                                    GoogleFonts.poppins(color: Colors.black),
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.sticky_note_2_rounded,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  cubit.notes[index].title.toString(),
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.black),
+                                ),
+                                subtitle: Text(
+                                  cubit.notes[index].description!,
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.black),
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.orange,),
+                                  onPressed: () {
+                                    cubit.deleteNote(cubit.notes[index].id);
+                                    navigateTo(context, NoteScreen());
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -81,7 +105,7 @@ class NoteScreen extends StatelessWidget {
                           )
                         ],
                       );
-                    }):
+                    }) :
                 Center(
                   child:
                   Column(
@@ -93,7 +117,7 @@ class NoteScreen extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       Text(
-                        'No Tasks Yet, Please Add Some Tasks',
+                        'No Notes Yet, Please Add Some Notes',
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,

@@ -149,5 +149,4 @@ class RegisterCubit extends Cubit<RegisterState> {
     print(selectedGrade);
     emit(SelectItemState());
   }
-
 }
