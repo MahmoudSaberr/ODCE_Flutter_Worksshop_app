@@ -45,7 +45,7 @@ class NoteScreen extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
                 color: Colors.white,
-                child: ListView.builder(
+                child: cubit.notes.isNotEmpty ? ListView.builder(
                     itemCount: cubit.notes.length,
                     itemBuilder: (context, index) {
                       print(cubit.notes[index].id);
@@ -81,7 +81,27 @@ class NoteScreen extends StatelessWidget {
                           )
                         ],
                       );
-                    }),
+                    }):
+                Center(
+                  child:
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.menu,
+                        size: 100.0,
+                        color: Colors.grey,
+                      ),
+                      Text(
+                        'No Tasks Yet, Please Add Some Tasks',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),),
               ),
             ),
             floatingActionButton: FloatingActionButton(

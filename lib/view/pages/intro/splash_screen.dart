@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
               text: 'Orange',
               style: TextStyle(
                   color: Colors.orange,
-                  fontSize: 26,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold
               ),
               children: <TextSpan>[
@@ -27,13 +27,13 @@ class SplashScreen extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(22.7),
           child: LinearPercentIndicator(
             width: MediaQuery.of(context).size.width - 50,
             animation: true,
             lineHeight: 10.0,
-            animationDuration: 2000,
-            percent: 0.9,
+            animationDuration: 3000,
+            percent: 1.0,
             barRadius: const Radius.circular(10.0),
             progressColor: Colors.orange,
           ),
