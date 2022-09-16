@@ -32,4 +32,5 @@ class NewsCubit extends Cubit<NewsState> {
       emit(GetNewsErrorState(error));
     });
   }
+
 }

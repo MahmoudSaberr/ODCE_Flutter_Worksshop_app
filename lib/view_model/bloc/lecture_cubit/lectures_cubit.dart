@@ -22,7 +22,6 @@ class LecturesCubit extends Cubit<LecturesState> {
   Future getLectures() async {
 
     emit(GetLecturesLoadingState());
-
     var token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDEsInJvbGUiOjQsImlhdCI6MTY2Mjk4MjE5NCwiZXhwIjoxNzQ5MzgyMTk0fQ.gD0pxtdsO1gPRnrpv4Mh2EJPqf-BxxL7fosY-B_BNag";
 
